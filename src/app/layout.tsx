@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { NextAuthProvider } from "./providers/nextauth-provider";
+import { Toaster } from "@/components/ui/toaster";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +29,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className=" overflow-y-auto">{children}</div>
+        <NextAuthProvider>
+          <div className=" overflow-y-auto">
+            {children}
+            <Toaster />
+            </div>
+        </NextAuthProvider>
       </body>
     </html>
   );

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import RecipeDetails from "./RecipeDetails"; // Import the details component
+import RecipeDetails from "./RecipeDetails";
 import { RecipeResult } from "@/app/(dashboard)/recipes/definitions/definitions";
 
 interface RecipeCardProps {
@@ -11,12 +11,12 @@ interface RecipeCardProps {
 
 const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
   const [isFlipped, setIsFlipped] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(false);
+
 
   return (
     <div className="flex justify-center items-center min-h-screen w-full px-4 sm:px-6" style={{ perspective: "1000px" }}>
       <motion.div
-        className="relative w-full max-w-md h-[90vh]" // Ensures the card is 90% of viewport height
+        className="relative w-full max-w-md h-[90vh]"
         initial={false}
         animate={{ rotateY: isFlipped ? 180 : 0 }}
         transition={{ duration: 0.6, ease: "easeInOut" }}
@@ -74,7 +74,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
             <button
               className="mt-6 px-5 py-3 w-full bg-gradient-to-r from-red-400 to-yellow-400 text-white font-semibold rounded-xl shadow-md transition-all hover:scale-105 hover:shadow-lg"
               onClick={(e) => {
-                e.stopPropagation(); // Prevent flipping when clicking the button
+                e.stopPropagation();
                 setIsFlipped(true);
               }}
             >

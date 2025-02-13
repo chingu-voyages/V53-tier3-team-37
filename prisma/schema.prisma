@@ -39,6 +39,8 @@ model User {
 
   favorites Favorite[]
 
+  healthLogs DailyHealthLog[]
+
   roles           Roles[]
   OneTimePassword OneTimePassword?
 }
@@ -164,5 +166,15 @@ model OneTimePassword {
   createdAt DateTime @default(now())
   expiresAt DateTime
   userId    String   @unique @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model DailyHealthLog {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @unique @map("user_id")
+  date      DateTime @default(now())
+  calories  Int      @default(0)
+  protein   Int      @default(0)
+  water     Int      @default(0)
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
